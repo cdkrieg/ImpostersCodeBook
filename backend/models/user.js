@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
+import { Friend } from "./friend";
 
 const userSchema = mongoose.Schema({
   name: { type: String, required: true, minLength: 5, maxLength: 50 },
@@ -13,9 +14,7 @@ const userSchema = mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, required: true },
-  friendsList: {type: Array},
-  pendingFriends: {type: Array},
-  friendRequests: {type: Array},
+  friends: {Friend},
   aboutMe: {type: String, minLength: 4, maxLength: 1024},
   profilePhoto:  {type: binData},
   status: {type: Boolean},
