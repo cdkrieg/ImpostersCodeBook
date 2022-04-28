@@ -13,6 +13,13 @@ const userSchema = mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, required: true },
+  friendsList: {type: Array},
+  pendingFriends: {type: Array},
+  friendRequests: {type: Array},
+  aboutMe: {type: String, minLength: 4, maxLength: 1024},
+  profilePhoto:  {type: binData},
+  status: {type: Boolean},
+  dateAdded: {type: Date, default: Date.now()},
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -45,7 +52,7 @@ const validateLogin = (req) => {
   return schema.validate(req);
 };
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 module.exports.User = User;
 module.exports.userSchema = userSchema;
 module.exports.validateUser = validateUser;
