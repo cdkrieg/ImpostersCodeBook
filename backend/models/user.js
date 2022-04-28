@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
-import { Friend } from "./friend";
+const Friend = require("./friend");
+// const { binary } = require("joi");
 
 const userSchema = mongoose.Schema({
   name: { type: String, required: true, minLength: 5, maxLength: 50 },
@@ -14,9 +15,10 @@ const userSchema = mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, required: true },
-  friends: {Friend},
+  friends: Friend.friendSchema,
   aboutMe: {type: String, minLength: 4, maxLength: 1024},
-  profilePhoto:  {type: binData},
+  //TODO figure out type for the profile photo
+  // profilePhoto:  {type: binary{_bsontype:"Binary"}},
   status: {type: Boolean},
   dateAdded: {type: Date, default: Date.now()},
 });
