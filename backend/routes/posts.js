@@ -19,30 +19,33 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all users
-// router.get("/", [auth], async (req, res) => {
-//   try {
-//     console.log(req.user);
-//     const users = await User.find();
-//     return res.send(users);
-//   } catch (ex) {
-//     return res.status(500).send(`Internal Server Error: ${ex}`);
-//   }
-// });
+// Get all posts
+// http://localhost:3007/api/posts
+router.get("/", async (req, res) => {
+  try {
+    // console.log(req.post);
+    const posts = await Post.find();
+    if (!posts) return res.status(400).send(`No posts to show!`);
+    return res.send(posts);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
 
-// DELETE a single user from the database
-// router.delete("/:userId", [auth, admin], async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.userId);
-//     if (!user)
-//       return res
-//         .status(400)
-//         .send(`User with id ${req.params.userId} does not exist!`);
-//     await user.remove();
-//     return res.send(user);
-//   } catch (ex) {
-//     return res.status(500).send(`Internal Server Error: ${ex}`);
-//   }
-// });
+// DELETE a single post from the database
+// http://localhost:3007/api/:postId
+router.delete("/:postId", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post)
+      return res
+        .status(400)
+        .send(`Post with id ${req.params.postId} does not exist!`);
+    await post.remove();
+    return res.send(post);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
 
 module.exports = router;
