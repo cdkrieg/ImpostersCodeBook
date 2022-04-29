@@ -23,8 +23,8 @@ router.put("/", async (req, res) => {
 // http://localhost:3007/api/friends
 router.put("/remove", async (req, res) => {
     try {
-        const friend = User.findByIdAndUpdate({_id: req.body._id}, {$pull: {friendsList: req.body.friendsList}});
-        if (friend) return res.status(201).send(`Friend with ID of ${req.body.friendsList} removed`) 
+        const friend = await User.findByIdAndUpdate({_id: req.body._id}, {$pull: {friendsList: req.body.friendsList}});
+        if (friend) return res.status(201).send(`${friend}`) 
         return res.status(400).send(`Error adding friend`)
    } catch (error) {
      return res.status(500).send(`Internal Server Error: ${error}`);
