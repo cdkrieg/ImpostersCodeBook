@@ -1,11 +1,10 @@
 const { User, validateLogin, validateUser } = require("../models/user");
-
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
-
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
+const fileUpload = require('../middleware/file-upload')
 
 //* POST register a new user
 router.post("/register", async (req, res) => {
