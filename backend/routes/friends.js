@@ -6,7 +6,7 @@ const router = express.Router();
 
 // POST a Friend Current
 // http://localhost:3007/api/friends
-router.put("/", async (req, res) => {
+router.put("/add/current", async (req, res) => {
   try {
     const friends = await User.updateOne(
       { _id: req.body._id },
@@ -23,7 +23,7 @@ router.put("/", async (req, res) => {
 });
 // POST a Friend Pending
 // http://localhost:3007/api/friends
-router.put("/", async (req, res) => {
+router.put("/add/pending", async (req, res) => {
   try {
     const friends = await User.updateOne(
       { _id: req.body._id },
@@ -40,7 +40,7 @@ router.put("/", async (req, res) => {
 });
 // POST a Friend Request
 // http://localhost:3007/api/friends
-router.put("/", async (req, res) => {
+router.put("/add/requests", async (req, res) => {
   try {
     const friends = await User.updateOne(
       { _id: req.body._id },
@@ -67,7 +67,7 @@ router.put("/remove/current", async (req, res) => {
       { $pull: { friendsList: req.body.friendsList } }
     );
     if (friend) return res.status(201).send(`${friend}`);
-    return res.status(400).send(`Error adding friend`);
+    return res.status(400).send(`Error removing friend`);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
@@ -81,21 +81,21 @@ router.put("/remove/pending", async (req, res) => {
       { $pull: { pendingFriends: req.body.pendingFriends } }
     );
     if (friend) return res.status(201).send(`${friend}`);
-    return res.status(400).send(`Error adding friend`);
+    return res.status(400).send(`Error removing pending friend`);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
 //Remove a friendRequest
 // http://localhost:3007/api/friends
-router.put("/remove/request", async (req, res) => {
+router.put("/remove/requests", async (req, res) => {
   try {
     const friend = await User.findByIdAndUpdate(
       { _id: req.body._id },
       { $pull: { friendRequests: req.body.friendRequests } }
     );
     if (friend) return res.status(201).send(`${friend}`);
-    return res.status(400).send(`Error adding friend`);
+    return res.status(400).send(`Error removing friend request`);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
