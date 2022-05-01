@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
 import './ProfilePage.css'
-import AboutMe from './AboutMe/AboutMe';
-import Projects from './Projects/Projects';
+import AboutMe from '../../components/AboutMe/AboutMe';
+import Projects from '../../components/Projects/Projects';
+import ListOfCoding from '../../components/ListOfCoding/ListOfCoding'
 
 const ProfilePage = (props) => {
     const { user } = useContext(AuthContext);
 
     return ( 
-        <div className='profilePage'>
-            <Projects user={user} />
+        <div className='container'>
+            <h1>Profile for {user.name}</h1>
+            {/* <Projects user={user} />
             <AboutMe user={user} />
+            <ListOfCoding user={user} /> */}
         </div>
      );
 }

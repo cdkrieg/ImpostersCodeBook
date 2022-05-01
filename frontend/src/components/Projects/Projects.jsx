@@ -2,7 +2,7 @@
 const Projects = ({user}) => {
     
     return ( 
-        <div className='projects'>
+        <div className='container'>
             <h3>PROJECTS</h3>
             <br/>
             <ul>

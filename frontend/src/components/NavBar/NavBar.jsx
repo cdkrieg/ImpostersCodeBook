@@ -14,8 +14,11 @@ const Navbar = () => {
       <ul>
         <li className="brand">
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>SOCIAL MEDIA testing</b>
+            <b>Imposter's CodeBook</b>
           </Link>
+        </li>
+        <li>
+          {user && <button onClick={()=>navigate("/profile")}>Profile</button>}
         </li>
         <li>
           {user ? (
