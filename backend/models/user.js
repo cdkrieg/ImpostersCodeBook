@@ -14,13 +14,12 @@ const userSchema = mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, required: true },
-  aboutMe: {type: String, minLength: 4, maxLength: 1024},
-  //TODO figure out type for the profile photo
-  // profilePhoto:  {type: binary{_bsontype:"Binary"}},
-  status: {type: Boolean},
+  aboutMe: {type: String, minLength: 4, maxLength: 1024, default:""},
   friendsList: {type: Array, default: []},
   pendingFriends: {type: Array, default: []},
   friendRequests: {type: Array, default: []},
+  projects: {type: Array, default: []},
+  codingLanguages: {type: Array, default: []},
   dateAdded: {type: Date, default: Date.now()},
 });
 
@@ -31,6 +30,12 @@ userSchema.methods.generateAuthToken = function () {
       name: this.name,
       email: this.email,
       isAdmin: this.isAdmin,
+      aboutMe: this.aboutMe,
+      friendsList: this.friendsList,
+      pendingFriends: this.pendingFriends,
+      projects: this.projects,
+      codingLanguages: this.codingLanguages,
+      dateAdded: this.dateAdded,
     },
     process.env.JWT_SECRET
   );
