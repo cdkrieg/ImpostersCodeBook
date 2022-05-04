@@ -99,4 +99,15 @@ router.get("/:userId", [auth], async (req, res) => {
   }
 })
 
+// Update property of user
+router.put("/update/:userId", async (req, res) => {
+  try {
+    const users = await User.updateOne({_id:req.params.userId}, req.body)
+    // await users.save();
+    return res.status(200).send(`Updated user`)
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+})
+
 module.exports = router;
