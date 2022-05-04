@@ -8,7 +8,6 @@ import DisplaySinglePost from "../../components/Posts/displaySinglePost";
 
 const MyPosts = () => {
   const [postList, setPostList] = useState([]);
-  const [post, setPost] = useState("");
   const { user } = useContext(AuthContext);
   const userId = user._id || null;
   const [update, setUpdate] = useState(false);
@@ -34,29 +33,18 @@ const MyPosts = () => {
     <div>
       {hidden === false && (
         <div>
-          <CreatePost
-            post={post}
-            setPost={setPost}
-            setPostList={setPostList}
-            postList={postList}
-            userId={userId}
-            handleClick={handleClick}
-          />
+          <CreatePost userId={userId} handleClick={handleClick} />
           <ErrorBoundary>
             <DisplayPosts
               postList={postList}
-              post={post}
-              hidden={hidden}
               setHidden={setHidden}
               setSinglePost={setSinglePost}
-              singlePost={singlePost}
             />
           </ErrorBoundary>
         </div>
       )}
       {hidden && (
         <DisplaySinglePost
-          setSinglePost={setSinglePost}
           singlePost={singlePost}
           setHidden={setHidden}
           handleClick={handleClick}

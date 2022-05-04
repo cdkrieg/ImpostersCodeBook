@@ -1,7 +1,7 @@
 import React from "react";
 import AxiosPosts from "../../Routes/postRoutes";
 
-const DisplaySinglePost = ({ post, getThePost, postId, singlePost, setHidden, handleClick }) => {
+const DisplaySinglePost = ({ singlePost, setHidden, handleClick }) => {
   async function deleteAPost(postId) {
     await AxiosPosts.deletePost(postId);
     setHidden(false);

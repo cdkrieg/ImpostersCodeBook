@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { handleInputChange, handleSubmit } from "../../hooks/useCustomForm";
 import AxiosPosts from "../../Routes/postRoutes";
 
-const CreatePost = ({ post, setPost, postList, userId, handleClick }) => {
+const CreatePost = ({ userId, handleClick }) => {
   const [value, setValue] = useState("");
 
   function handlePost(event) {
@@ -39,14 +38,6 @@ const CreatePost = ({ post, setPost, postList, userId, handleClick }) => {
           }}
         />
         <button type="submit">Post</button>
-        <button
-          type="button"
-          onClick={() => {
-            handleClick();
-          }}
-        >
-          Reload
-        </button>
       </div>
     </form>
   );

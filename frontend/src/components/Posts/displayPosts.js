@@ -1,18 +1,14 @@
 import React from "react";
-import AxiosPosts from "../../Routes/postRoutes";
-import { Routes, Route } from "react-router-dom";
 
-const DisplayPosts = ({ postList, setHidden, setSinglePost, singlePost }) => {
-  function handleClick(post) {
+const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
+  function handleClick() {
     setHidden(true);
-
-    console.log(post);
   }
   return (
     <div>
-      {postList.map((post) => {
+      {postList.map((post, index) => {
         return (
-          <div>
+          <div key={index}>
             <button
               onClick={() => {
                 handleClick(post);
