@@ -117,4 +117,5 @@ const AxiosFriends = {
   removeFriendRequest,
   removePendingFriend,
 };
+
 export default AxiosFriends;
