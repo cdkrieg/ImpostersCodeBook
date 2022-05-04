@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
+import AxiosOnlineStatus from "../Routes/status";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import AxiosOnlineStatus from "../Routes/status";
 
 const AuthContext = createContext();
 
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         let token = response.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
-        console.log(token)
+        console.log(token);
         setUser(jwtDecode(token));
         navigate("/");
       } else {
@@ -45,10 +45,10 @@ export const AuthProvider = ({ children }) => {
     try {
       let response = await axios.post(`${BASE_URL}/login`, loginData);
       if (response.status === 200) {
-        console.log(response)
+        console.log(response);
         localStorage.setItem("token", JSON.stringify(response.data));
         setUser(jwtDecode(response.data));
-        console.log(jwtDecode(response.data))
+        console.log(jwtDecode(response.data));
         setIsServerError(false);
         navigate("/");
       } else {
@@ -69,9 +69,8 @@ export const AuthProvider = ({ children }) => {
       }
       navigate("/");
       localStorage.removeItem("token");
-      console.log("token removed")
+      console.log("token removed");
       setUser(null);
-
     }
   };
 
