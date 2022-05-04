@@ -90,4 +90,13 @@ router.delete("/:userId", [auth, admin], async (req, res) => {
   }
 });
 
+// Get property of user
+router.get("/:userId", [auth], async (req, res) => {
+  try {
+    const users = await User.findById(req.params.userId)
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+})
+
 module.exports = router;

@@ -1,8 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import AxiosOnlineStatus from "../Routes/status";
 
 const AuthContext = createContext();
 
@@ -16,12 +17,20 @@ export const AuthProvider = ({ children }) => {
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user !== null) {
+      AxiosOnlineStatus.online(user._id);
+      console.log(user);
+    }
+  }, [user]);
+
   const registerUser = async (registerData) => {
     try {
       let response = await axios.post(`${BASE_URL}/register`, registerData);
       if (response.status === 200) {
         let token = response.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
+        console.log(token)
         setUser(jwtDecode(token));
         navigate("/");
       } else {
@@ -36,8 +45,10 @@ export const AuthProvider = ({ children }) => {
     try {
       let response = await axios.post(`${BASE_URL}/login`, loginData);
       if (response.status === 200) {
+        console.log(response)
         localStorage.setItem("token", JSON.stringify(response.data));
         setUser(jwtDecode(response.data));
+        console.log(jwtDecode(response.data))
         setIsServerError(false);
         navigate("/");
       } else {
@@ -49,11 +60,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
     if (user) {
-      localStorage.removeItem("token");
-      setUser(null);
+      try {
+        await AxiosOnlineStatus.offline(user._id);
+      } catch (error) {
+        console.log("Error changing offline status: " + error);
+      }
       navigate("/");
+      localStorage.removeItem("token");
+      console.log("token removed")
+      setUser(null);
+
     }
   };
 

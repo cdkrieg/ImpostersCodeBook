@@ -1,0 +1,27 @@
+.profile{
+    display: grid;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.profile h1,h3{
+    text-align: center; 
+}
+
+.profile ul{
+    display: block;
+    padding: 2rem;
+}
+.profile .body{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border: 1px solid;
+}
+.row{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.col{
+    margin: 1rem;
+}
