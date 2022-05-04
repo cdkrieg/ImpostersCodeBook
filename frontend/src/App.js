@@ -1,3 +1,4 @@
+// MY USERID 627060d490b327341fa9b120
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -6,6 +7,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import MyPosts from "./pages/MyPosts/myPosts";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -29,6 +31,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/myPosts" element={<MyPosts />} />
       </Routes>
       <Footer />
     </div>
