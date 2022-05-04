@@ -3,7 +3,7 @@ const Joi = require("joi");
 
 const postSchema = mongoose.Schema({
   body: { type: String, minLength: 2, maxLength: 255, required: true },
-  likeStatus: { type: Boolean, default: false },
+  likeStatus: { type: Boolean, default: null },
   userId: { type: String, required: true },
   dateAdded: { type: Date, default: Date.now() },
 });

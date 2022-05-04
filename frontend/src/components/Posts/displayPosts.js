@@ -1,4 +1,5 @@
 import React from "react";
+import CustomButton from "./likeButton";
 
 const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
   function handleClick() {
@@ -17,6 +18,7 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
             >
               {post.body}
             </button>
+            <CustomButton post={post}/>
           </div>
         );
       })}
