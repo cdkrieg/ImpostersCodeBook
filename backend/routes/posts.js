@@ -3,17 +3,15 @@ const { Post, validatePost } = require("../models/post");
 const express = require("express");
 const router = express.Router();
 
-
-
 // POST a Post
 // http://localhost:3007/api/post
 router.post("/", async (req, res) => {
   try {
-    const {error} = validatePost(req.body);
+    const { error } = validatePost(req.body);
     if (error) return res.status(400).send(error);
     let newPost = await new Post(req.body);
     await newPost.save();
-    return res.status(201).send(newPost)
+    return res.status(201).send(newPost);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
@@ -25,6 +23,18 @@ router.get("/", async (req, res) => {
   try {
     // console.log(req.post);
     const posts = await Post.find();
+    if (!posts) return res.status(400).send(`No posts to show!`);
+    return res.send(posts);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+// Get all posts from single user
+// http://localhost:3007/api/posts/:userId
+router.get("/:userId", async (req, res) => {
+  try {
+    // console.log(req.post);
+    const posts = await Post.find({ userId: req.params.userId });
     if (!posts) return res.status(400).send(`No posts to show!`);
     return res.send(posts);
   } catch (error) {
