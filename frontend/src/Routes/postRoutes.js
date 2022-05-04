@@ -1,7 +1,6 @@
 import axios from "axios";
 
 async function getPosts(userId) {
-
   try {
     let response = await axios.get("http://localhost:3007/api/posts/" + userId);
     if (response) {
@@ -13,7 +12,6 @@ async function getPosts(userId) {
 }
 
 async function getAPost(postId) {
-
   try {
     let response = await axios.get("http://localhost:3007/api/posts/" + postId);
     if (response) {
@@ -27,6 +25,19 @@ async function getAPost(postId) {
 async function updatePosts(obj) {
   try {
     let response = await axios.post("http://localhost:3007/api/posts/", obj);
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error adding post: " + error);
+  }
+}
+async function updateAPost(postId, obj) {
+  try {
+    let response = await axios.put(
+      "http://localhost:3007/api/posts/" + postId,
+      obj
+    );
     if (response) {
       return response.data;
     }
@@ -48,5 +59,5 @@ async function deletePost(postId) {
   }
 }
 
-const AxiosPosts = { deletePost, updatePosts, getPosts, getAPost };
+const AxiosPosts = { deletePost, updatePosts, getPosts, getAPost, updateAPost };
 export default AxiosPosts;
