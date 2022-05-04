@@ -1,7 +1,6 @@
 import axios from "axios";
 
 async function getPosts(userId) {
-  console.log("http://localhost:3007/api/posts/" + userId);
 
   try {
     let response = await axios.get("http://localhost:3007/api/posts/" + userId);
@@ -14,7 +13,6 @@ async function getPosts(userId) {
 }
 
 async function getAPost(postId) {
-  console.log("http://localhost:3007/api/posts/" + postId);
 
   try {
     let response = await axios.get("http://localhost:3007/api/posts/" + postId);
@@ -27,7 +25,6 @@ async function getAPost(postId) {
 }
 
 async function updatePosts(obj) {
-  console.log(obj);
   try {
     let response = await axios.post("http://localhost:3007/api/posts/", obj);
     if (response) {

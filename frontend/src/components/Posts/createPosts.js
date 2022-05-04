@@ -33,7 +33,7 @@ const CreatePost = ({ userId, handleClick }) => {
           onChange={(event) => setValue(event.target.value)}
           onKeyUp={(event) => {
             if (event.key === "Enter") {
-              handlePost();
+              handlePost(event)
             }
           }}
         />
