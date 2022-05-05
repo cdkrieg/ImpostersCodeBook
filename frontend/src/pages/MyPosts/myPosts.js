@@ -49,6 +49,7 @@ const MyPosts = () => {
           singlePost={singlePost}
           setHidden={setHidden}
           handleClick={handleClick}
+          userId={userId}
         />
       )}
     </div>
