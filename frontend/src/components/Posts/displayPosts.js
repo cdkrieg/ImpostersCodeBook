@@ -8,22 +8,24 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
 
   return (
     <div>
-      {postList.map((post, index) => {
-        return (
-          <div key={index}>
-            <button
-              onClick={() => {
-                handleClick(post);
-                setSinglePost(post);
-              }}
-            >
-              {post.name} <br />
-              {post.body}
-            </button>
-            <CustomButton post={post} />
-          </div>
-        );
-      })}
+      {postList
+        .map((post, index) => {
+          return (
+            <div key={index}>
+              <button
+                onClick={() => {
+                  handleClick(post);
+                  setSinglePost(post);
+                }}
+              >
+                {post.name} <br />
+                {post.body}
+              </button>
+              <CustomButton post={post} />
+            </div>
+          );
+        })
+        .reverse()}
     </div>
   );
 };
