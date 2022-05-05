@@ -21,6 +21,7 @@ const userSchema = mongoose.Schema({
   projects: { type: Array, default: [] },
   codingLanguages: { type: Array, default: [] },
   dateAdded: { type: Date, default: Date.now() },
+  image: { type: String, default: "" },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -36,6 +37,7 @@ userSchema.methods.generateAuthToken = function () {
       projects: this.projects,
       codingLanguages: this.codingLanguages,
       dateAdded: this.dateAdded,
+      image: this.image,
     },
     process.env.JWT_SECRET
   );
@@ -47,6 +49,7 @@ const validateUser = (user) => {
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(1024).required(),
     isAdmin: Joi.bool().required(),
+    image: Joi.string(),
   });
   return schema.validate(user);
 };
