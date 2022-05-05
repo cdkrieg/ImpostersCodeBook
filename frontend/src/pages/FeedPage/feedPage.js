@@ -6,25 +6,24 @@ import AuthContext from "../../context/AuthContext";
 import ErrorBoundary from "../ErrorBoundary";
 import DisplaySinglePost from "../../components/Posts/displaySinglePost";
 
-const MyPosts = () => {
+const FeedPage = () => {
   const [postList, setPostList] = useState([]);
   const { user } = useContext(AuthContext);
   const userId = user._id || null;
   const [update, setUpdate] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [singlePost, setSinglePost] = useState();
-  const name = user.name || null;
 
   useEffect(() => {
-    getPosts(userId);
+    getAllPosts();
   }, [update]);
 
   function handleClick() {
     setUpdate(!update);
   }
 
-  async function getPosts(userId) {
-    let posts = await AxiosPosts.getPosts(userId);
+  async function getAllPosts() {
+    let posts = await AxiosPosts.getAllPosts();
     if (posts) {
       setPostList(posts);
     } else setPostList({ Object: "No Posts" });
@@ -34,7 +33,7 @@ const MyPosts = () => {
     <div>
       {hidden === false && (
         <div>
-          <CreatePost userId={userId} handleClick={handleClick} name={name} />
+          <CreatePost userId={userId} handleClick={handleClick} />
           <ErrorBoundary>
             <DisplayPosts
               postList={postList}
@@ -55,4 +54,4 @@ const MyPosts = () => {
   );
 };
 
-export default MyPosts;
+export default FeedPage;

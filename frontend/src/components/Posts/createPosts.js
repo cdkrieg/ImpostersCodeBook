@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AxiosPosts from "../../Routes/postRoutes";
 
-const CreatePost = ({ userId, handleClick }) => {
+const CreatePost = ({ userId, handleClick, name }) => {
   const [value, setValue] = useState("");
 
   function handlePost(event) {
@@ -10,6 +10,7 @@ const CreatePost = ({ userId, handleClick }) => {
     let newPost = {
       body: value,
       userId: userId,
+      name: name,
     };
     createNewPost(newPost);
     setValue("");
@@ -33,7 +34,7 @@ const CreatePost = ({ userId, handleClick }) => {
           onChange={(event) => setValue(event.target.value)}
           onKeyUp={(event) => {
             if (event.key === "Enter") {
-              handlePost(event)
+              handlePost(event);
             }
           }}
         />

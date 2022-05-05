@@ -5,6 +5,7 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
   function handleClick() {
     setHidden(true);
   }
+
   return (
     <div>
       {postList.map((post, index) => {
@@ -16,9 +17,10 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
                 setSinglePost(post);
               }}
             >
+              {post.name} <br />
               {post.body}
             </button>
-            <CustomButton post={post}/>
+            <CustomButton post={post} />
           </div>
         );
       })}
