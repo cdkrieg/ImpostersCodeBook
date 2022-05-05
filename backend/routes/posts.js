@@ -41,6 +41,20 @@ router.get("/:userId", async (req, res) => {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
+// PUT an existing post
+// http://localhost:3007/api/posts/:postId
+router.put("/:postId", async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(
+      { _id: req.params.postId },
+      req.body
+    );
+    if (!post) return res.status(400).send(`No post to show!`);
+    return res.send(post);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
 
 // DELETE a single post from the database
 // http://localhost:3007/api/:postId
