@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user !== null) {
       AxiosOnlineStatus.online(user._id);
-      console.log(user);
     }
   }, [user]);
 
@@ -45,10 +44,8 @@ export const AuthProvider = ({ children }) => {
     try {
       let response = await axios.post(`${BASE_URL}/login`, loginData);
       if (response.status === 200) {
-        console.log(response)
         localStorage.setItem("token", JSON.stringify(response.data));
         setUser(jwtDecode(response.data));
-        console.log(jwtDecode(response.data))
         setIsServerError(false);
         navigate("/");
       } else {

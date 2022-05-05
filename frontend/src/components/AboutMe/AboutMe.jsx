@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Modal, Form, Button } from "react-bootstrap";
-import updateUser from "../../Routes/userRoutes";
+import AxiosUsers from "../../Routes/userRoutes";
+import "./AboutMe.css";
 
 const AboutMe = () => {
   const { user } = useContext(AuthContext);
@@ -11,20 +12,22 @@ const AboutMe = () => {
   const handleClose = () => setShow(false);
 
   useEffect(() => {
+    if(!aboutMe)
     setAboutMe(user.aboutMe);
-  }, [user]);
 
-  function handleSubmit(event) {
+  }, []);
+
+
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    handleClose();
     try {
-    const { error } = updateUser(user._id, { aboutMe: aboutMe });
-    if (error) {
-      alert("Could not update user!");
-    }
+      const updatedUser = await AxiosUsers.updateUser(user._id, {update: { property: 'aboutMe', value: aboutMe }});
+      console.log(updatedUser)
+      setAboutMe(updatedUser.aboutMe)
+      handleClose();
     } catch (error) {
-      console.log(error)
-    }
+      console.log(error);
     }
   }
 
@@ -35,15 +38,19 @@ const AboutMe = () => {
         Edit
       </Button>
       <br />
-      <p>{user && user.aboutMe}</p>
+      <p>{aboutMe && aboutMe}</p>
       <br />
-      <Modal show={show} onHide={handleClose} className='modal fade'>
-        <Form onSubmit={(event)=>handleSubmit(event)}>
+      <Modal show={show} onHide={handleClose} className='modal fade' backdrop='static'>
+        <Modal.Header>
+          <Modal.Title>
+            EDIT: About Me (must be at least 5 characters long!
+          </Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Group>
-            <Form.Label>
-              About Me (must be at least 5 characters long!
-            </Form.Label>
+            <br />
             <Form.Control
+              className='textArea'
               type='textArea'
               value={aboutMe}
               onChange={(event) => {
@@ -53,14 +60,20 @@ const AboutMe = () => {
                 if (event.key === "Enter") handleSubmit(event);
               }}
             />
+            <br />
             <Button
               type='btn'
+              className="button primary"
               onClick={(event) => {
                 handleSubmit(event);
               }}>
               Submit
             </Button>
-            <Button type='button' className='close' onClick={handleClose}>
+            <Button
+              type='button'
+              variant='secondary'
+              className='close'
+              onClick={handleClose}>
               Close
             </Button>
           </Form.Group>
