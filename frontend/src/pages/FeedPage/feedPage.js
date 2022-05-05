@@ -13,6 +13,7 @@ const FeedPage = () => {
   const [update, setUpdate] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [singlePost, setSinglePost] = useState();
+  const name = user.name || null;
 
   useEffect(() => {
     getAllPosts();
@@ -26,6 +27,8 @@ const FeedPage = () => {
     let posts = await AxiosPosts.getAllPosts();
     if (posts) {
       setPostList(posts);
+      let newList = postList.filter((item) => user.friendsList.includes(item));
+      setPostList(newList);
     } else setPostList({ Object: "No Posts" });
   }
 
@@ -33,7 +36,7 @@ const FeedPage = () => {
     <div>
       {hidden === false && (
         <div>
-          <CreatePost userId={userId} handleClick={handleClick} />
+          <CreatePost userId={userId} handleClick={handleClick} name={name} />
           <ErrorBoundary>
             <DisplayPosts
               postList={postList}
@@ -48,6 +51,7 @@ const FeedPage = () => {
           singlePost={singlePost}
           setHidden={setHidden}
           handleClick={handleClick}
+          userId={userId}
         />
       )}
     </div>
