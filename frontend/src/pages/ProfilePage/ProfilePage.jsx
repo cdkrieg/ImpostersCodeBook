@@ -11,7 +11,7 @@ const ProfilePage = (props) => {
 
   return (
     <Container className='profile'>
-      <Row className='title'>
+      <Row>
         <h1>Profile for {user.name}</h1>
       </Row>
 
