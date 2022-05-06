@@ -14,7 +14,9 @@ const DisplaySinglePost = ({ singlePost, setHidden, handleClick, userId }) => {
 
   return (
     <div>
-      {singlePost && singlePost.body}
+      {singlePost && singlePost.name} <br />
+      {singlePost.body}
+      {console.log(singlePost.name)}
       <button
         onClick={() => {
           if (singlePost.userId === userId) {

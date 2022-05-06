@@ -13,7 +13,7 @@ const FeedPage = () => {
   const [update, setUpdate] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [singlePost, setSinglePost] = useState();
-  const name = user.name || null;
+  const name = "";
 
   useEffect(() => {
     getAllPosts();
@@ -28,10 +28,7 @@ const FeedPage = () => {
     if (posts) {
       let newList = [];
       for (let i = 0; i < posts.length; i++) {
-        console.log(i);
         for (let j = 0; j < user.friendsList.length; j++) {
-          console.log(user.friendsList[j]);
-          console.log(posts[i].userId);
           if (user.friendsList[j] === posts[i].userId) {
             newList.push(posts[i]);
           }
@@ -45,7 +42,6 @@ const FeedPage = () => {
     <div>
       {hidden === false && (
         <div>
-          <CreatePost userId={userId} handleClick={handleClick} name={name} />
           <ErrorBoundary>
             <DisplayPosts
               postList={postList}

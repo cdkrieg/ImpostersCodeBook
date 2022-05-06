@@ -57,6 +57,17 @@ async function updateAPost(postId, obj) {
   }
 }
 
+async function getPostUsersId(postId) {
+  try {
+    let response = await axios.get("http://localhost:3007/api/posts/" + postId);
+    if (response) {
+      return response.data.userId;
+    }
+  } catch (error) {
+    console.log("Error getting posts: " + error);
+  }
+}
+
 async function deletePost(postId) {
   try {
     let response = await axios.delete(
