@@ -26,9 +26,17 @@ const FeedPage = () => {
   async function getAllPosts() {
     let posts = await AxiosPosts.getAllPosts();
     if (posts) {
-      setPostList(posts);
-      let newList = postList.filter((item) => user.friendsList.includes(item));
-      setPostList(newList);
+      let newList = [];
+      for (let i = 0; i < posts.length; i++) {
+        console.log(i);
+        for (let j = 0; j < user.friendsList.length; j++) {
+          console.log(user.friendsList[j]);
+          console.log(posts[i].userId);
+          if (user.friendsList[j] === posts[i].userId) {
+            newList.push(posts[i]);
+          }
+        }
+      }
     } else setPostList({ Object: "No Posts" });
   }
 
