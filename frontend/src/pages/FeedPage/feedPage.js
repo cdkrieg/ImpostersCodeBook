@@ -37,6 +37,7 @@ const FeedPage = () => {
           }
         }
       }
+      setPostList(newList);
     } else setPostList({ Object: "No Posts" });
   }
 
