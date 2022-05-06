@@ -28,7 +28,7 @@ const CreatePost = ({ userId, handleClick, name }) => {
   }
 
   return (
-    <form onSubmit={handlePost}>
+    <form className="postContainer" onSubmit={handlePost}>
       <div>
         <textarea
           type="text"
