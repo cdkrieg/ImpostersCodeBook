@@ -1,0 +1,44 @@
+form {
+  display: flex;
+  border-radius: 7px;
+  width: 90%;
+  height: 10vh;
+  margin: auto;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+textarea {
+  width: 50em;
+  height: 7em;
+}
+
+.postButton {
+  margin-left: 2em;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.postlist {
+  display: flex;
+  border: 1px black solid;
+  flex-direction: column;
+  border-radius: 7px;
+  width: 70%;
+  height: auto;
+  margin: auto;
+  justify-content: center;
+}
+
+.postbody {
+  display: flex;
+  justify-content: space-between;
+  margin: 2em;
+  border-bottom: 1px solid black;
+  align-items: center;
+}
+
+.postbodies {
+  width: 100% !important;
+}
