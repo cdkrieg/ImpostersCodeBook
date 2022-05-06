@@ -6,7 +6,6 @@ const express = require("express");
 const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
 
-const path = require('path')
 
 //* POST register a new user
 router.post("/register", fileUpload.single("image"), async (req, res) => {
