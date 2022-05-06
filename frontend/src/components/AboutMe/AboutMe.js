@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Modal, Form, Button } from "react-bootstrap";
 import AxiosUsers from "../../Routes/userRoutes";
-import "./AboutMe.css";
 
 const AboutMe = () => {
   const { user } = useContext(AuthContext);

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
 import AxiosOnlineStatus from "../Routes/status";
 import axios from "axios";
@@ -15,6 +16,8 @@ export const AuthProvider = ({ children }) => {
   const decodedToken = decodedUser ? jwtDecode(decodedUser) : null;
   const [user, setUser] = useState(() => decodedToken);
   const [isServerError, setIsServerError] = useState(false);
+  const [file, setFile] = useState();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +27,17 @@ export const AuthProvider = ({ children }) => {
   }, [user]);
 
   const registerUser = async (registerData) => {
+    const form = new FormData();
+    form.append("name", registerData.name);
+    form.append("email", registerData.email);
+    form.append("password", registerData.password);
+    form.append("isAdmin", registerData.isAdmin);
+    form.append("image", file);
+    for(var pair of form.entries()) {
+      console.log(pair[0]+ ', '+ pair[1]);
+   }
     try {
-      let response = await axios.post(`${BASE_URL}/register`, registerData);
+      let response = await axios.post(`${BASE_URL}/register`, form);
       if (response.status === 200) {
         let token = response.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
@@ -69,6 +81,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       console.log("token removed");
       setUser(null);
+      setFile(null);
     }
   };
 
