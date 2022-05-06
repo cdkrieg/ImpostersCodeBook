@@ -7,7 +7,9 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
   function handleClick() {
     setHidden(true);
   }
+
   return (
+
     <div className="postlist">
       {postList
         .map((post, index) => {
@@ -15,11 +17,14 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
             <div key={index} className="postbody">
               <button
                 className="postbodies"
+
                 onClick={() => {
                   handleClick(post);
                   setSinglePost(post);
                 }}
               >
+
+                {post.name} <br />
                 {post.body}
               </button>
 

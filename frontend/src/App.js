@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import MyPosts from "./pages/MyPosts/myPosts";
+import FeedPage from "./pages/FeedPage/feedPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/myPosts" element={<MyPosts />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/feedPage" element={<FeedPage />} />
       </Routes>
       <Footer />
     </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import AxiosPosts from "../../Routes/postRoutes";
 
-const CreatePost = ({ userId, handleClick }) => {
+const CreatePost = ({ userId, handleClick, name }) => {
   const [value, setValue] = useState("");
 
   function handlePost(event) {
@@ -13,6 +13,7 @@ const CreatePost = ({ userId, handleClick }) => {
     let newPost = {
       body: value,
       userId: userId,
+      name: name,
     };
     createNewPost(newPost);
     setValue("");

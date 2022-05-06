@@ -1,7 +1,7 @@
 import React from "react";
 import AxiosPosts from "../../Routes/postRoutes";
 
-const DisplaySinglePost = ({ singlePost, setHidden, handleClick }) => {
+const DisplaySinglePost = ({ singlePost, setHidden, handleClick, userId }) => {
   async function deleteAPost(postId) {
     await AxiosPosts.deletePost(postId);
     setHidden(false);
@@ -17,7 +17,9 @@ const DisplaySinglePost = ({ singlePost, setHidden, handleClick }) => {
       {singlePost && singlePost.body}
       <button
         onClick={() => {
-          deleteAPost(singlePost._id);
+          if (singlePost.userId === userId) {
+            deleteAPost(singlePost._id);
+          } else alert("Not authorized to delete post");
         }}
       >
         Delete Post

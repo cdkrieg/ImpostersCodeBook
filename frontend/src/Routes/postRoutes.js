@@ -1,5 +1,16 @@
 import axios from "axios";
 
+async function getAllPosts() {
+  try {
+    let response = await axios.get("http://localhost:3007/api/posts/");
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error getting posts: " + error);
+  }
+}
+
 async function getPosts(userId) {
   try {
     let response = await axios.get("http://localhost:3007/api/posts/" + userId);
@@ -59,5 +70,12 @@ async function deletePost(postId) {
   }
 }
 
-const AxiosPosts = { deletePost, updatePosts, getPosts, getAPost, updateAPost };
+const AxiosPosts = {
+  getAllPosts,
+  deletePost,
+  updatePosts,
+  getPosts,
+  getAPost,
+  updateAPost,
+};
 export default AxiosPosts;

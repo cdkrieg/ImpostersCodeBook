@@ -1,6 +1,8 @@
+
 import axios from "axios";
 
 const baseUrl = "http://localhost:3007/api/users";
+
 
 async function updateUser(userId, body) {
   let updateProperty = body.update.property
