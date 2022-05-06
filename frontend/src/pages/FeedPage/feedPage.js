@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import CreatePost from "../../components/Posts/createPosts";
 import DisplayPosts from "../../components/Posts/displayPosts";
 import AxiosPosts from "../../Routes/postRoutes";
 import AuthContext from "../../context/AuthContext";
@@ -13,7 +12,6 @@ const FeedPage = () => {
   const [update, setUpdate] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [singlePost, setSinglePost] = useState();
-  const name = "";
 
   useEffect(() => {
     getAllPosts();
