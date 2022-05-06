@@ -56,6 +56,9 @@ router.put("/:postId", async (req, res) => {
   }
 });
 
+
+
+
 // DELETE a single post from the database
 // http://localhost:3007/api/:postId
 router.delete("/:postId", async (req, res) => {
