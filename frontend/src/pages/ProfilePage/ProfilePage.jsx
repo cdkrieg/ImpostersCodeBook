@@ -1,32 +1,50 @@
-import React, { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
 import "./ProfilePage.css";
+
+import { Col, Container, Row } from "react-bootstrap";
+import React, { useContext } from "react";
+
 import AboutMe from "../../components/AboutMe/AboutMe";
-import Projects from "../../components/Projects/Projects";
+import AuthContext from "../../context/AuthContext";
 import ListOfCoding from "../../components/ListOfCoding/ListOfCoding";
-import { Container, Row, Col } from "react-bootstrap";
+import Projects from "../../components/Projects/Projects";
 
 const ProfilePage = (props) => {
   const { user } = useContext(AuthContext);
 
   return (
-    <Container className='profile'>
-      <Row>
-        <h1>Profile for {user.name}</h1>
-      </Row>
+    <div>
+      <h1>Profile for {user.name}</h1>
+      <div className="profile">
+        <Row className="body">
+          <Col></Col>
+          <Col>
+            <Projects />
+            <AboutMe />
+          </Col>
 
-      <Row className="body">
-        <Col></Col>
-        <Col>
-          <Projects />
-          <AboutMe />
-        </Col>
+          <Col>
+            <ListOfCoding />
+          </Col>
+        </Row>
+      </div>
+    </div>
+    // <Container className='profile'>
+    //   <Row>
+    //     <h1>Profile for {user.name}</h1>
+    //   </Row>
 
-        <Col>
-          <ListOfCoding />
-        </Col>
-      </Row>
-    </Container>
+    //   <Row className="body">
+    //     <Col></Col>
+    //     <Col>
+    //       <Projects />
+    //       <AboutMe />
+    //     </Col>
+
+    //     <Col>
+    //       <ListOfCoding />
+    //     </Col>
+    //   </Row>
+    // </Container>
   );
 };
 
