@@ -18,7 +18,13 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          {user && <button onClick={()=>navigate("/")}>Home</button>}
+        </li>
+        <li>
           {user && <button onClick={()=>navigate("/myPosts")}>My Posts</button>}
+        </li>
+        <li>
+          {user && <button onClick={()=>navigate("/feedPage")}>Friends Feed</button>}
         </li>
         <li>
           {user && <button onClick={()=>navigate("/profile")}>Profile</button>}

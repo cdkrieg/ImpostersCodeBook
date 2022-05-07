@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import AuthContext from "../../context/AuthContext";
+import { useState, useEffect, useContext } from "react";
 import "../../App.css";
 import AxiosPosts from "../../Routes/postRoutes";
 
 const CustomButton = ({ post }) => {
   const [buttonClass, setButtonClass] = useState("likeButton");
   const [buttonClass2, setButtonClass2] = useState("dislikeButton");
+  const { user } = useContext(AuthContext);
+  const userId = user._id || null;
 
   useEffect(() => {
-    if (post.likeStatus === false) {
+    if (post.dislikes.includes(userId)) {
       setButtonClass("likeButton");
       setButtonClass2("dislikeButtonActive");
-    } else if (post.likeStatus === true) {
+    } else if (post.likes.includes(userId)) {
       setButtonClass("likeButtonActive");
       setButtonClass2("dislikeButton");
     } else {
@@ -20,27 +23,30 @@ const CustomButton = ({ post }) => {
   }, []);
 
   function handleClick(event) {
-    let likedPost = {
-      likeStatus: true,
-    };
-    let dislikedPost = {
-      likeStatus: false,
-    };
 
-    async function setToLike(postId, obj) {
-      await AxiosPosts.updateAPost(postId, obj);
+    async function updateTheLikeList(postId, obj) {
+      await AxiosPosts.updatePostsLikes(postId, obj);
       return obj;
     }
-    async function setToDislike(postId, obj) {
-      await AxiosPosts.updateAPost(postId, obj);
+    async function updateTheDislikeList(postId, obj) {
+      await AxiosPosts.updatePostsDislikes(postId, obj);
       return obj;
     }
+    async function updateTheLikeListRemove(postId, obj) {
+      await AxiosPosts.updatePostsLikesRemove(postId, obj);
+      return obj;
+    }
+    async function updateTheDislikeListRemove(postId, obj) {
+      await AxiosPosts.updatePostsDislikesRemove(postId, obj);
+      return obj;
+    }
+    let likes="likes";
+    let dislikes="dislikes";
     if (event.target.id === "like") {
       if (buttonClass === "likeButton") {
         setButtonClass("likeButtonActive");
-        setToLike(post._id, likedPost);
-        console.log(likedPost);
-        console.log(post);
+        updateTheLikeList(post._id, { likes: userId });
+        updateTheDislikeListRemove(post._id,  {dislikes: userId});
         setButtonClass2("dislikeButton");
       } else {
         setButtonClass("likeButton");
@@ -48,7 +54,8 @@ const CustomButton = ({ post }) => {
     } else if (event.target.id === "dislike") {
       if (buttonClass2 === "dislikeButton") {
         setButtonClass2("dislikeButtonActive");
-        setToDislike(post._id, dislikedPost);
+        updateTheLikeListRemove(post._id, { likes: userId });
+        updateTheDislikeList(post._id, {dislikes: userId});
         setButtonClass("likeButton");
       } else {
         setButtonClass2("dislikeButton");
@@ -57,10 +64,20 @@ const CustomButton = ({ post }) => {
   }
   return (
     <div>
-      <button className={buttonClass} onClick={handleClick}>
+      <button
+        className={buttonClass}
+        onClick={(event) => {
+          handleClick(event);
+        }}
+      >
         <i id="like" className="fa fa-thumbs-up"></i>
       </button>
-      <button className={buttonClass2} onClick={handleClick}>
+      <button
+        className={buttonClass2}
+        onClick={(event) => {
+          handleClick(event);
+        }}
+      >
         <i id="dislike" className="fa fa-thumbs-down"></i>
       </button>
     </div>

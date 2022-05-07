@@ -1,6 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import "../../pages/ProfilePage/ProfilePage.css";
+
+import { Button, Form, Modal } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+
 import AuthContext from "../../context/AuthContext";
-import { Modal, Form, Button } from "react-bootstrap";
 import AxiosUsers from "../../Routes/userRoutes";
 
 const ListOfCoding = () => {
@@ -37,22 +40,28 @@ const ListOfCoding = () => {
 
   return (
     <div>
-      <h3>LIST OF CODING LANGUAGES AND CERTS </h3>
-      <Button type='button' onClick={handleShow}>
-        Edit
-      </Button>
-      <br />
-      <ul>
-        {codingLanguages && codingLanguages.map((language, index) => {
-          return <li key={index}>{language}</li>;
-        })}
-      </ul>
-      <br />
+      <div className="coding-container">
+        <h3>LIST OF CODING LANGUAGES AND CERTS </h3>
+
+        <br />
+
+        <ul>
+          {codingLanguages &&
+            codingLanguages.map((language, index) => {
+              return <li key={index}>{language}</li>;
+            })}
+        </ul>
+        <br />
+        <Button type="button" onClick={handleShow}>
+          Edit
+        </Button>
+      </div>
       <Modal
         show={show}
         onHide={handleClose}
-        className='modal fade'
-        backdrop='static'>
+        className="modal fade"
+        backdrop="static"
+      >
         <Modal.Header>
           <Modal.Title>EDIT: List of Coding Languages and Certs</Modal.Title>
         </Modal.Header>
@@ -60,8 +69,8 @@ const ListOfCoding = () => {
           <Form.Group>
             <br />
             <Form.Control
-              className='textArea'
-              type='textArea'
+              className="textArea"
+              type="textArea"
               value={tempCodingLanguages}
               onChange={(event) => {
                 setTempCodingLanguages(event.target.value);
@@ -72,18 +81,20 @@ const ListOfCoding = () => {
             />
             <br />
             <Button
-              type='btn'
-              className='button primary'
+              type="btn"
+              className="button primary"
               onClick={(event) => {
                 handleSubmit(event);
-              }}>
+              }}
+            >
               Submit
             </Button>
             <Button
-              type='button'
-              variant='secondary'
-              className='close'
-              onClick={handleClose}>
+              type="button"
+              variant="secondary"
+              className="close"
+              onClick={handleClose}
+            >
               Close
             </Button>
           </Form.Group>

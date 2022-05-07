@@ -1,7 +1,10 @@
+import "../Posts/MyPost.css";
+
 import React, { useState } from "react";
+
 import AxiosPosts from "../../Routes/postRoutes";
 
-const CreatePost = ({ userId, handleClick }) => {
+const CreatePost = ({ userId, handleClick, name }) => {
   const [value, setValue] = useState("");
 
   function handlePost(event) {
@@ -10,6 +13,7 @@ const CreatePost = ({ userId, handleClick }) => {
     let newPost = {
       body: value,
       userId: userId,
+      name: name,
     };
     createNewPost(newPost);
     setValue("");
@@ -24,20 +28,22 @@ const CreatePost = ({ userId, handleClick }) => {
   }
 
   return (
-    <form onSubmit={handlePost}>
-      <label>Post</label>
+    <form className="postContainer" onSubmit={handlePost}>
       <div>
         <textarea
           type="text"
+          placeholder="Enter Post Here"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           onKeyUp={(event) => {
             if (event.key === "Enter") {
-              handlePost(event)
+              handlePost(event);
             }
           }}
         />
-        <button type="submit">Post</button>
+        <button type="submit" className="postButton">
+          Post
+        </button>
       </div>
     </form>
   );
