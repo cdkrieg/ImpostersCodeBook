@@ -29,7 +29,8 @@ async function onlineUser(){
   try {
     let response = await axios.get(`${baseUrl}/status`)
     if (response){
-      return response.data
+      console.log(response.data[0].online)
+      return response.data[0].online
     }
   } catch (error) {
     console.log("Error getting list of online users: " + error);
