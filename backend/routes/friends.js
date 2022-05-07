@@ -107,10 +107,10 @@ router.put("/remove/requests", async (req, res) => {
 // http://localhost:3007/api/friends
 router.get("/current", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body._id });
+    const user = await User.findOne(req.body);
     const friends = user.friendsList;
     if (friends.length === 0)
-      return res.status(400).send(`No friends to show!`);
+      return res.send(`No friends to show!`);
     return res.send(friends);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
@@ -121,10 +121,10 @@ router.get("/current", async (req, res) => {
 // http://localhost:3007/api/friends
 router.get("/pending", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body._id });
+    const user = await User.findOne(req.body);
     const friends = user.pendingFriends;
     if (friends.length === 0)
-      return res.status(400).send(`No pending friends to show!`);
+      return res.send(`No pending friends to show!`);
     return res.send(friends);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
@@ -135,10 +135,10 @@ router.get("/pending", async (req, res) => {
 // http://localhost:3007/api/friends
 router.get("/requests", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body._id });
+    const user = await User.findOne(req.body);
     const friends = user.friendRequests;
     if (friends.length === 0)
-      return res.status(400).send(`No friend requests to show!`);
+      return res.send(`No friend requests to show!`);
     return res.send(friends);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);

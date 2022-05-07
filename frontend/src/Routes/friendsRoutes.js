@@ -39,7 +39,7 @@ async function addFriendRequest(friendId) {
 // Get all current friends
 async function getAllFriends(userId) {
   try {
-    let response = await axios.get(`${baseUrl}/current`, userId);
+    let response = await axios.get(`${baseUrl}/current`, {'_id': userId});
     if (response) {
       return response.data;
     }
@@ -51,7 +51,7 @@ async function getAllFriends(userId) {
 // Get all pending friends
 async function getAllPendingFriends(userId) {
   try {
-    let response = await axios.get(`${baseUrl}/pending`, userId);
+    let response = await axios.get(`${baseUrl}/pending`, {'_id': userId});
     if (response) {
       return response.data;
     }
@@ -63,7 +63,7 @@ async function getAllPendingFriends(userId) {
 // Get all friend requests
 async function getAllFriendRequests(userId) {
   try {
-    let response = await axios.get(`${baseUrl}/requests`, userId);
+    let response = await axios.get(`${baseUrl}/requests`, {'_id': userId});
     if (response) {
       return response.data;
     }

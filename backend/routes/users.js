@@ -6,8 +6,9 @@ const express = require("express");
 const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
 
+
 //* POST register a new user
-router.post("/register", async (req, res) => {
+router.post("/register", fileUpload.single("image"), async (req, res) => {
   try {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -22,6 +23,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: await bcrypt.hash(req.body.password, salt),
       isAdmin: req.body.isAdmin,
+      image: req.file.path,
     });
 
     await user.save();
@@ -34,6 +36,7 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        image: user.image,
       });
   } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
@@ -108,9 +111,10 @@ router.put("/update", async (req, res) => {
   try {
     const users = await User.findByIdAndUpdate(
       { _id: req.body.id },
-      req.body.body, {new:true}
+      req.body.body,
+      { new: true }
     );
-  
+
     return res.status(200).send(users);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);

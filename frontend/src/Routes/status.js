@@ -25,5 +25,17 @@ async function offline(userId) {
     }
   }
 
-const AxiosOnlineStatus = {offline, online}
+async function onlineUser(){
+  try {
+    let response = await axios.get(`${baseUrl}/status`)
+    if (response){
+      console.log(response.data[0].online)
+      return response.data[0].online
+    }
+  } catch (error) {
+    console.log("Error getting list of online users: " + error);
+  }
+}  
+
+const AxiosOnlineStatus = {offline, online, onlineUser}
 export default AxiosOnlineStatus;
