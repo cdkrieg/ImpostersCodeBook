@@ -45,19 +45,73 @@ router.get("/:userId", async (req, res) => {
 // http://localhost:3007/api/posts/:postId
 router.put("/:postId", async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(
-      { _id: req.params.postId },
-      req.body
-    );
+    const post = await Post.UpdateOne({ _id: req.params.postId }, req.body);
     if (!post) return res.status(400).send(`No post to show!`);
     return res.send(post);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
-
-
-
+// PUT an existing post add like
+// http://localhost:3007/api/posts/like/:postId
+router.put("/like/:postId", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.postId },
+      { $addToSet: { likes: req.body.likes } },
+      { new: true }
+    );
+    if (!post) return res.status(400).send(`No likes to show!`);
+    return res.send(post.likes);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+// PUT an existing post remove likes
+// http://localhost:3007/api/posts/like/:postId
+router.put("/like/remove/:postId", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.postId },
+      { $pull: { likes: req.body.likes } },
+      { new: true }
+    );
+    if (!post) return res.status(400).send(`No likes to show!`);
+    return res.send(post.likes);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+// PUT an existing post add dislikes
+// http://localhost:3007/api/posts/dislike/:postId
+router.put("/dislike/:postId", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.postId },
+      { $addToSet: { dislikes: req.body.dislikes } },
+      { new: true }
+    );
+    if (!post) return res.status(400).send(`No dislikes to show!`);
+    return res.send(post.dislikes);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+// PUT an existing post remove dislikes
+// http://localhost:3007/api/posts/dislike/:postId
+router.put("/dislike/remove/:postId", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.postId },
+      { $pull: { dislikes: req.body.dislikes } },
+      { new: true }
+    );
+    if (!post) return res.status(400).send(`No dislikes to show!`);
+    return res.send(post.dislikes);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
 
 // DELETE a single post from the database
 // http://localhost:3007/api/:postId
