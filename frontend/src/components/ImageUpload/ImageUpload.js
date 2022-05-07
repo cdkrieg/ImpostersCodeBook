@@ -1,26 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,  useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const ImageUpload = (props) => {
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsvalid] = useState(false);
   const filePickerRef = useRef();
+  const {user, file, setFile} = useContext(AuthContext)
 
-  useEffect(() => {
-    if (!props.file) {
+   useEffect(() => {
+    if (!file) {
       return;
     }
-    const fileReader = new fileReader();
+    const fileReader = new FileReader();
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result);
     };
-    fileReader.readAsDataURL(props.file);
-  }, [props.file]);
+    console.log(file)
+    fileReader.readAsDataURL(file);
+  }, [file]);
 
   const pickedHandler = (event) => {
     let pickedFile;
     if (event.target.files && event.target.files.length === 1) {
-      pickedFile = event.target.files[0];
-      props.setFile(pickedFile);
+      pickedFile = event.target.files.file[0];
+      console.log(pickedFile)
+      setFile(pickedFile);
       setIsvalid(true);
     } else {
       setIsvalid(false);
@@ -34,15 +38,14 @@ const ImageUpload = (props) => {
   return (
     <div className='form-control'>
       <input
-        id={props.id}
         ref={filePickerRef}
         style={{ display: "none" }}
         type='file'
         accept='.jpg,.jpeg,.png'
         onChange={pickedHandler}
       />
-      <div className={`image-upload ${props.center && "center"}`}></div>
-      {!isValid && <p>{props.errorText}</p>}
+      <div className={`image-upload`}></div>
+      {!isValid && <p>Invalid image selected</p>}
     </div>
   );
 };

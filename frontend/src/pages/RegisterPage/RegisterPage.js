@@ -4,7 +4,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 
 const RegisterPage = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, user, file, setFile } = useContext(AuthContext);
   const defaultValues = {
     name: "",
     email: "",
@@ -16,7 +16,6 @@ const RegisterPage = () => {
     defaultValues,
     registerUser
   );
-  const { user, file, setFile } = useContext(AuthContext);
 
   return (
     <div className='container-0'>
