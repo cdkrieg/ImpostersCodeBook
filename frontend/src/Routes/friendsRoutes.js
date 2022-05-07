@@ -41,7 +41,6 @@ async function getAllFriends(userId) {
   try {
     let response = await axios.get(`${baseUrl}/current`, {'_id': userId});
     if (response) {
-      console.log(response.data)
       return response.data;
     }
   } catch (error) {
