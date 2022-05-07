@@ -43,6 +43,58 @@ async function updatePosts(obj) {
     console.log("Error adding post: " + error);
   }
 }
+async function updatePostsLikes(postId, obj) {
+  try {
+    let response = await axios.put(
+      "http://localhost:3007/api/posts/like/" + postId,
+      obj
+    );
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error adding like: " + error);
+  }
+}
+async function updatePostsLikesRemove(postId, obj) {
+  try {
+    let response = await axios.put(
+      "http://localhost:3007/api/posts/like/remove/" + postId,
+      obj
+    );
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error adding like: " + error);
+  }
+}
+async function updatePostsDislikes(postId, obj) {
+  try {
+    let response = await axios.put(
+      "http://localhost:3007/api/posts/dislike/" + postId,
+      obj
+    );
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error adding dislike: " + error);
+  }
+}
+async function updatePostsDislikesRemove(postId, obj) {
+  try {
+    let response = await axios.put(
+      "http://localhost:3007/api/posts/dislike/remove/" + postId,
+      obj
+    );
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("Error adding dislike: " + error);
+  }
+}
 async function updateAPost(postId, obj) {
   try {
     let response = await axios.put(
@@ -54,17 +106,6 @@ async function updateAPost(postId, obj) {
     }
   } catch (error) {
     console.log("Error adding post: " + error);
-  }
-}
-
-async function getPostUsersId(postId) {
-  try {
-    let response = await axios.get("http://localhost:3007/api/posts/" + postId);
-    if (response) {
-      return response.data.userId;
-    }
-  } catch (error) {
-    console.log("Error getting posts: " + error);
   }
 }
 
@@ -88,5 +129,9 @@ const AxiosPosts = {
   getPosts,
   getAPost,
   updateAPost,
+  updatePostsLikes,
+  updatePostsDislikes,
+  updatePostsLikesRemove,
+  updatePostsDislikesRemove,
 };
 export default AxiosPosts;
