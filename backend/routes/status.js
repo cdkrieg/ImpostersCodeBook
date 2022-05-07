@@ -37,4 +37,17 @@ router.put("/offline/:statusId", async (req, res) => {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
+
+router.get("/", async (req, res) => {
+  try {
+    const onlineUsers = await Status.find()
+    if(onlineUsers){
+    console.log(onlineUsers.online)
+    return res.status(200).send(onlineUsers)
+    }
+    else return res.status(400).send('Error getting online users')
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+})
 module.exports = router;
