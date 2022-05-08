@@ -1,5 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
+import AxiosOnlineStatus from "../Routes/status";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +16,28 @@ export const AuthProvider = ({ children }) => {
   const decodedToken = decodedUser ? jwtDecode(decodedUser) : null;
   const [user, setUser] = useState(() => decodedToken);
   const [isServerError, setIsServerError] = useState(false);
+  const [file, setFile] = useState();
+
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user !== null) {
+      AxiosOnlineStatus.online(user._id);
+    }
+  }, [user]);
+
   const registerUser = async (registerData) => {
+    const form = new FormData();
+    form.append("name", registerData.name);
+    form.append("email", registerData.email);
+    form.append("password", registerData.password);
+    form.append("isAdmin", registerData.isAdmin);
+    form.append("image", file);
+    for(var pair of form.entries()) {
+      console.log(pair[0]+ ', '+ pair[1]);
+   }
     try {
-      let response = await axios.post(`${BASE_URL}/register`, registerData);
+      let response = await axios.post(`${BASE_URL}/register`, form);
       if (response.status === 200) {
         let token = response.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
@@ -49,11 +68,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
     if (user) {
-      localStorage.removeItem("token");
-      setUser(null);
+      try {
+        await AxiosOnlineStatus.offline(user._id);
+      } catch (error) {
+        console.log("Error changing offline status: " + error);
+      }
       navigate("/");
+      localStorage.removeItem("token");
+      console.log("token removed");
+      setUser(null);
+      setFile(null);
     }
   };
 
@@ -63,6 +89,8 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
     registerUser,
     isServerError,
+    file,
+    setFile
   };
 
   return (

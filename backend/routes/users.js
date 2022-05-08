@@ -4,10 +4,11 @@ const admin = require("../middleware/admin");
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
-const fileUpload = require('../middleware/file-upload')
+const fileUpload = require("../middleware/file-upload");
+
 
 //* POST register a new user
-router.post("/register", async (req, res) => {
+router.post("/register", fileUpload.single("image"), async (req, res) => {
   try {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -22,6 +23,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: await bcrypt.hash(req.body.password, salt),
       isAdmin: req.body.isAdmin,
+      image: req.file.path,
     });
 
     await user.save();
@@ -34,6 +36,7 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        image: user.image,
       });
   } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
@@ -67,7 +70,6 @@ router.post("/login", async (req, res) => {
 // Get all users
 router.get("/", [auth], async (req, res) => {
   try {
-    console.log(req.user);
     const users = await User.find();
     return res.send(users);
   } catch (ex) {
@@ -87,6 +89,35 @@ router.delete("/:userId", [auth, admin], async (req, res) => {
     return res.send(user);
   } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
+// Get property of user
+router.get("/:userId", async (req, res) => {
+  try {
+    const users = await User.findById(req.params.userId);
+    if (users) {
+      return res.send(users);
+    } else {
+      return res.status(400).send("Error getting user");
+    }
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+
+// Update property of user
+router.put("/update", async (req, res) => {
+  try {
+    const users = await User.findByIdAndUpdate(
+      { _id: req.body.id },
+      req.body.body,
+      { new: true }
+    );
+
+    return res.status(200).send(users);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
 

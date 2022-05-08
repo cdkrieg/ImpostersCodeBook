@@ -2,15 +2,20 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const postSchema = mongoose.Schema({
-  body: {type: String, minLength: 5, maxLength: 255, required: true},
-  like: {type: Boolean},
-  userId: {type: String},
-  dateAdded: {type: Date, default: Date.now()},
+  body: { type: String, minLength: 2, maxLength: 255, required: true },
+  likeStatus: { type: Boolean, default: null },
+  userId: { type: String, required: true },
+  name: { type: String, required: true },
+  likes: { type: Array, default: [] },
+  dislikes: { type: Array, default: [] },
+  dateAdded: { type: Date, default: Date.now() },
 });
 
 const validatePost = (post) => {
   const schema = Joi.object({
-    body: Joi.string().min(5).max(255).required(),
+    body: Joi.string().min(2).max(255).required(),
+    userId: Joi.string().required(),
+    name: Joi.string().required(),
   });
   return schema.validate(post);
 };
@@ -19,4 +24,3 @@ const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
 module.exports.Post = Post;
 module.exports.postSchema = postSchema;
 module.exports.validatePost = validatePost;
-

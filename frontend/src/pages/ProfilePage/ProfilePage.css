@@ -1,0 +1,62 @@
+.profile {
+  display: grid;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.profile h1,
+h3 {
+  text-align: center;
+}
+
+.profile ul {
+  display: block;
+  padding: 2rem;
+}
+.profile .body {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  /* border: 10px solid; */
+}
+.row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.col {
+  margin: 1rem;
+}
+
+.aboutme-container {
+  border: 1px solid black;
+  border-radius: 17px;
+  margin-top: 3em;
+}
+
+.projects-container {
+  border: 1px solid black;
+  border-radius: 17px;
+}
+
+.coding-container {
+  border: 1px solid black;
+  border-radius: 17px;
+  margin-left: 2em;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+
+.profile-button {
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.textArea {
+  width: 20em;
+  height: 5em;
+}

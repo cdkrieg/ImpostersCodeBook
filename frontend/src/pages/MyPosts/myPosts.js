@@ -6,7 +6,7 @@ import AuthContext from "../../context/AuthContext";
 import ErrorBoundary from "../ErrorBoundary";
 import DisplaySinglePost from "../../components/Posts/displaySinglePost";
 
-const HomePage = () => {
+const MyPosts = () => {
   const [postList, setPostList] = useState([]);
   const { user } = useContext(AuthContext);
   const userId = user._id || null;
@@ -16,15 +16,15 @@ const HomePage = () => {
   const name = user.name || null;
 
   useEffect(() => {
-    getAllPosts();
+    getPosts(userId);
   }, [update]);
 
   function handleClick() {
     setUpdate(!update);
   }
 
-  async function getAllPosts() {
-    let posts = await AxiosPosts.getAllPosts();
+  async function getPosts(userId) {
+    let posts = await AxiosPosts.getPosts(userId);
     if (posts) {
       setPostList(posts);
     } else setPostList({ Object: "No Posts" });
@@ -32,7 +32,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1 className="container-0">Home Page for {user.name}!</h1>;
       {hidden === false && (
         <div>
           <CreatePost userId={userId} handleClick={handleClick} name={name} />
@@ -57,4 +56,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MyPosts;

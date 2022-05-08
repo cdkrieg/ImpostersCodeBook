@@ -14,14 +14,14 @@ const userSchema = mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, required: true },
-  aboutMe: {type: String, minLength: 4, maxLength: 1024},
-  //TODO figure out type for the profile photo
-  // profilePhoto:  {type: binary{_bsontype:"Binary"}},
-  status: {type: Boolean},
-  friendsList: {type: Array, default: []},
-  pendingFriends: {type: Array, default: []},
-  friendRequests: {type: Array, default: []},
-  dateAdded: {type: Date, default: Date.now()},
+  aboutMe: { type: String, minLength: 4, maxLength: 1024, default: "     " },
+  friendsList: { type: Array, default: [] },
+  pendingFriends: { type: Array, default: [] },
+  friendRequests: { type: Array, default: [] },
+  projects: { type: Array, default: [] },
+  codingLanguages: { type: Array, default: [] },
+  dateAdded: { type: Date, default: Date.now() },
+  image: { type: String, default: "" },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -31,6 +31,13 @@ userSchema.methods.generateAuthToken = function () {
       name: this.name,
       email: this.email,
       isAdmin: this.isAdmin,
+      aboutMe: this.aboutMe,
+      friendsList: this.friendsList,
+      pendingFriends: this.pendingFriends,
+      projects: this.projects,
+      codingLanguages: this.codingLanguages,
+      dateAdded: this.dateAdded,
+      image: this.image,
     },
     process.env.JWT_SECRET
   );
@@ -42,6 +49,7 @@ const validateUser = (user) => {
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(1024).required(),
     isAdmin: Joi.bool().required(),
+    image: Joi.string(),
   });
   return schema.validate(user);
 };

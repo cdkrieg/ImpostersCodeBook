@@ -19,7 +19,7 @@ button {
   color: steelblue;
   font-size: 1rem;
   font-family: inherit;
-  max-width: 100px;
+  max-width: fit-content;
   padding: 0.5rem 0.5rem;
 }
 
@@ -29,7 +29,7 @@ button:hover {
   background-color: steelblue;
 }
 
-.container {
+.container-0 {
   margin: 0 auto;
   max-width: 600px;
   overflow: auto;
@@ -51,4 +51,74 @@ button:hover {
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
+}
+
+.likeButton {
+  display: inline-block;
+  padding: 2px 5px 5px 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3b4255;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 20px 20px;
+}
+.dislikeButton {
+  display: inline-block;
+  padding: 5px 5px 2px 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #424c68;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 20px 20px;
+}
+.likeButtonActive {
+  background-color: #39cc2c;
+  color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  display: inline-block;
+  padding: 2px 5px 5px 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  margin: 20px 20px;
+}
+.dislikeButtonActive {
+  background-color: #e22d15;
+  color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  display: inline-block;
+  padding: 5px 5px 2px 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  margin: 20px 20px;
+}
+.button-align {
+  align-items: center;
+}
+.btn-primary {
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
