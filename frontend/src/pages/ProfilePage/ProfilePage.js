@@ -13,7 +13,7 @@ const ProfilePage = (props) => {
 
   return (
     <div>
-      <h1>Profile for {user.name}</h1>
+      <h1 className="profile-name">Profile for {user.name}</h1>
       <div className="profile">
         <Row className="body">
           <Col></Col>
@@ -28,23 +28,6 @@ const ProfilePage = (props) => {
         </Row>
       </div>
     </div>
-    // <Container className='profile'>
-    //   <Row>
-    //     <h1>Profile for {user.name}</h1>
-    //   </Row>
-
-    //   <Row className="body">
-    //     <Col></Col>
-    //     <Col>
-    //       <Projects />
-    //       <AboutMe />
-    //     </Col>
-
-    //     <Col>
-    //       <ListOfCoding />
-    //     </Col>
-    //   </Row>
-    // </Container>
   );
 };
 
