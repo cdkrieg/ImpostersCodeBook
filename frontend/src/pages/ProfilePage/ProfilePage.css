@@ -2,7 +2,7 @@
   display: grid;
   margin-top: 2rem;
   margin-left: 1rem;
-  margin-right: 10rem;
+  margin-right: 5rem;
 }
 
 .profile-name {
@@ -59,22 +59,6 @@ h3 {
   text-transform: uppercase;
 }
 
-/* .projects-button {
-  border: none;
-  outline: none;
-  text-transform: uppercase;
-}
-.aboutme-buttons {
-  display: flex;
-  justify-content: center;
-}
-
-.aboutme-button {
-  border: none;
-  outline: none;
-  text-transform: uppercase;
-} */
-
 .textArea {
   width: 20em;
   height: 5em;
@@ -97,3 +81,13 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+.image-container {
+  text-align: center;
+  margin-top: 1em;
+}
+
+/* .image-style {
+
+  text-align: right;
+}  */
