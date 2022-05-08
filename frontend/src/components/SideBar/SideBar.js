@@ -16,8 +16,12 @@ const SideBar = () => {
     if (user) {
       getOnlineUsers();
     }
-    if (user.image !== "") {
-      setPhoto(`http:localhost:3007/${user.image}`);
+    if (user !== null) {
+      if (user.image !== null) {
+        if (user.image !== "") {
+          setPhoto(`http:localhost:3007/${user.image}`);
+        }
+      }
     }
   }, []);
 
@@ -35,36 +39,46 @@ const SideBar = () => {
 
   function loadData() {
     setTimeout(() => {
-      if (user.friendsList !== null && Array.isArray(user.friendsList)) {
-        if (online && Array.isArray(online)) {
-          let tempUsers = online.filter((userId) =>
-            user.friendsList.includes(userId)
-          );
-          setOnlineFriends(tempUsers);
+      if (user !== null) {
+        if (user.friendsList !== null) {
+          if (Array.isArray(user.friendsList)) {
+            if (online && Array.isArray(online)) {
+              let tempUsers = online.filter((userId) =>
+                user.friendsList.includes(userId)
+              );
+              setOnlineFriends(tempUsers);
+            }
+          }
         }
-      }
-      if (user.pendingFriends !== null && Array.isArray(user.pendingFriends)) {
-        if (Array.isArray(online)) {
-          let tempUsers = online.filter((userId) =>
-            user.pendingFriends.includes(userId)
-          );
-          setOnlinePendingFriends(tempUsers);
+        if (user.pendingFriends !== null) {
+          if (Array.isArray(user.pendingFriends)) {
+            if (Array.isArray(online)) {
+              let tempUsers = online.filter((userId) =>
+                user.pendingFriends.includes(userId)
+              );
+              setOnlinePendingFriends(tempUsers);
+            }
+          }
         }
-      }
-      if (user.friendRequests !== null && Array.isArray(user.friendRequests)) {
-        if (Array.isArray(online)) {
-          let tempUsers = online.filter((userId) =>
-            user.friendRequests.includes(userId)
-          );
-          setOnlineFriendRequests(tempUsers);
+        if (user.friendRequests !== null) {
+          if (Array.isArray(user.friendRequests)) {
+            if (Array.isArray(online)) {
+              let tempUsers = online.filter((userId) =>
+                user.friendRequests.includes(userId)
+              );
+              setOnlineFriendRequests(tempUsers);
+            }
+          }
         }
-      }
-      if (user.image !== "") {
-        setPhoto();
-      } else {
-        setPhoto(
-          "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
-        );
+        if (user.image !== "") {
+          if (user.image !== null) {
+            setPhoto();
+          } else {
+            setPhoto(
+              "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
+            );
+          }
+        }
       }
     }, 300);
   }
@@ -81,18 +95,16 @@ const SideBar = () => {
           marginTop: "-32px",
           position: "absolute",
           fontSize: "2em",
-        }}
-      >
-        <CDBSidebar textColor="#fff" backgroundColor="rgb(51, 59, 65)">
-          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+        }}>
+        <CDBSidebar textColor='#fff' backgroundColor='rgb(51, 59, 65)'>
+          <CDBSidebarHeader prefix={<i className='fa fa-bars fa-large'></i>}>
             <a
-              href="/"
-              className="text-decoration-none"
-              style={{ color: "inherit" }}
-            >
+              href='/'
+              className='text-decoration-none'
+              style={{ color: "inherit" }}>
               <img
                 src={`http://localhost:3007/uploads/images/${user.image}`}
-                alt="default"
+                alt='default'
                 style={{ width: "100px", height: "auto" }}
               />
               <h4 style={{ textAlign: "center", fontSize: "1em" }}>
@@ -101,19 +113,19 @@ const SideBar = () => {
             </a>
           </CDBSidebarHeader>
 
-          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
+          <CDBSidebarMenuItem icon='user' style={{ fontSize: "1rem" }}>
             {online && online.length} Users online
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
+          <CDBSidebarMenuItem icon='user' style={{ fontSize: "1rem" }}>
             Friends ({(onlineFriends && onlineFriends.length) || "0"})
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
+          <CDBSidebarMenuItem icon='user' style={{ fontSize: "1rem" }}>
             Pending Friends (
             {(onlinePendingFriends && onlinePendingFriends.length) || "0"})
           </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
+          <CDBSidebarMenuItem icon='user' style={{ fontSize: "1rem" }}>
             Friend Requests (
             {(onlineFriendRequests && onlineFriendRequests.length) || "0"})
           </CDBSidebarMenuItem>

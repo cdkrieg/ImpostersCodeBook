@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
         let token = response.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
         setUser(jwtDecode(token));
+        console.log(localStorage.getItem("token"))
         navigate("/");
       } else {
         navigate("/register");
@@ -57,6 +58,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data));
         setUser(jwtDecode(response.data));
+        console.log(localStorage.getItem("token"))
         setIsServerError(false);
         navigate("/");
       } else {
