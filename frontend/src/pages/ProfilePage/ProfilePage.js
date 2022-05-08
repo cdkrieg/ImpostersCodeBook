@@ -32,7 +32,13 @@ const ProfilePage = (props) => {
       {!user || !user.image ? (
         <ImageUpload />
       ) : (
-        <img src={photo} alt={photAlt} />
+        <div className="big-profile-img">
+          <img
+            src={photo}
+            alt={photAlt}
+            style={{ marginLeft: "5em", width: "100px", height: "100px" }}
+          />
+        </div>
       )}
       <div className="profile">
         <Row className="body">
