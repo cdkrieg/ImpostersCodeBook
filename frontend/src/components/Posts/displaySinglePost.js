@@ -1,5 +1,7 @@
-import React from "react";
+import "../Posts/MyPost.css";
+
 import AxiosPosts from "../../Routes/postRoutes";
+import React from "react";
 
 const DisplaySinglePost = ({ singlePost, setHidden, handleClick, userId }) => {
   async function deleteAPost(postId) {
@@ -18,6 +20,7 @@ const DisplaySinglePost = ({ singlePost, setHidden, handleClick, userId }) => {
       {singlePost.body}
       {console.log(singlePost.name)}
       <button
+        className="my-post-button"
         onClick={() => {
           if (singlePost.userId === userId) {
             deleteAPost(singlePost._id);
