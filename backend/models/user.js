@@ -50,6 +50,8 @@ const validateUser = (user) => {
     password: Joi.string().min(5).max(1024).required(),
     isAdmin: Joi.bool().required(),
     image: Joi.string(),
+    aboutMe:Joi.string().min(4).max(1024),
+    
   });
   return schema.validate(user);
 };
