@@ -15,7 +15,7 @@ const DisplaySinglePost = ({ singlePost, setHidden, handleClick, userId }) => {
   }
 
   return (
-    <div>
+    <div className="delete-post">
       {singlePost && singlePost.name} <br />
       {singlePost.body}
       {console.log(singlePost.name)}

@@ -47,12 +47,14 @@ textarea {
   font-family: inherit;
   max-width: fit-content;
   padding: 0.5rem 0.5rem;
+  margin-left: 4em;
 }
 
 .my-post-button:hover {
   cursor: pointer;
   color: white;
   background-color: steelblue;
+  border-radius: 12px;
 }
 
 .likeButton {
@@ -136,4 +138,15 @@ textarea {
   font-size: 0.75rem;
   margin-bottom: 0;
   padding-left: 0;
+}
+
+.delete-post {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 12px;
+  margin-top: 2em;
+  width: 30%;
+  padding: 2em;
+  margin: auto;
 }
