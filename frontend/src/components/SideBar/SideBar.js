@@ -16,8 +16,8 @@ const SideBar = () => {
     if (user) {
       getOnlineUsers();
     }
-    if(user.image !== ""){
-      setPhoto(`http:localhost:3007/${user.image}`)
+    if (user.image !== "") {
+      setPhoto(`http:localhost:3007/${user.image}`);
     }
   }, []);
 
@@ -75,10 +75,12 @@ const SideBar = () => {
       <div
         style={{
           display: "flex",
+          width: "60px",
           height: "100vh",
           overflow: "scroll initial",
           marginTop: "-32px",
           position: "absolute",
+          fontSize: "2em",
         }}
       >
         <CDBSidebar textColor="#fff" backgroundColor="rgb(51, 59, 65)">
@@ -90,26 +92,28 @@ const SideBar = () => {
             >
               <img
                 src={`http://localhost:3007/uploads/images/${user.image}`}
-                alt='default'
-                style={{ width: "150px", height: "auto" }}
+                alt="default"
+                style={{ width: "100px", height: "auto" }}
               />
-              <h4 style={{ textAlign: "center" }}>{user.name}</h4>
+              <h4 style={{ textAlign: "center", fontSize: "1em" }}>
+                {user.name}
+              </h4>
             </a>
           </CDBSidebarHeader>
 
-          <CDBSidebarMenuItem icon="user">
+          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
             {online && online.length} Users online
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon="user">
+          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
             Friends ({(onlineFriends && onlineFriends.length) || "0"})
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon="user">
+          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
             Pending Friends (
             {(onlinePendingFriends && onlinePendingFriends.length) || "0"})
           </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon="user">
+          <CDBSidebarMenuItem icon="user" style={{ fontSize: "1rem" }}>
             Friend Requests (
             {(onlineFriendRequests && onlineFriendRequests.length) || "0"})
           </CDBSidebarMenuItem>

@@ -21,8 +21,11 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
                   setSinglePost(post);
                 }}
               >
-                {post.name} <br />
-                {post.body}
+                {" "}
+                <div className="name-container">{post.name}</div>
+                <br />
+                <p className="post">Post:</p>
+                <div className="body-container">{post.body}</div>
               </button>
 
               <CustomButton post={post} />

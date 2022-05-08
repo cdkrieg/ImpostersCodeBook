@@ -41,7 +41,7 @@ textarea {
 
 .my-post-button {
   background-color: transparent;
-  border: 2px solid steelblue;
+  border: none;
   color: steelblue;
   font-size: 1rem;
   font-family: inherit;
@@ -116,4 +116,24 @@ textarea {
   border: none;
   border-radius: 15px;
   margin: 20px 20px;
+}
+
+.name-container {
+  margin-bottom: 2em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.body-container {
+  text-align: left;
+  margin-top: 0;
+}
+
+.post {
+  color: black !important;
+  text-transform: uppercase !important;
+  text-align: left;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+  padding-left: 0;
 }
