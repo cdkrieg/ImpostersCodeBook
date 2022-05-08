@@ -9,10 +9,14 @@ const SideBar = () => {
   const [onlineFriends, setOnlineFriends] = useState();
   const [onlinePendingFriends, setOnlinePendingFriends] = useState();
   const [onlineFriendRequests, setOnlineFriendRequests] = useState();
+  const [photo, setPhoto] = useState();
 
   useEffect(() => {
     if (user) {
       getOnlineUsers();
+    }
+    if(user.image !== ""){
+      setPhoto(`http:localhost:3007/${user.image}`)
     }
   }, []);
 
@@ -27,17 +31,19 @@ const SideBar = () => {
       console.log("Error getting list of online users: " + error);
     }
   }
-  function loadData(){
+  
+
+  function loadData() {
     setTimeout(() => {
-      if (Array.isArray(user.friendsList)) {
-        if (Array.isArray(online)) {
+      if (user.friendsList !== null && Array.isArray(user.friendsList)) {
+        if (online && Array.isArray(online)) {
           let tempUsers = online.filter((userId) =>
             user.friendsList.includes(userId)
           );
           setOnlineFriends(tempUsers);
         }
       }
-      if (Array.isArray(user.pendingFriends)) {
+      if (user.pendingFriends !== null && Array.isArray(user.pendingFriends)) {
         if (Array.isArray(online)) {
           let tempUsers = online.filter((userId) =>
             user.pendingFriends.includes(userId)
@@ -45,7 +51,7 @@ const SideBar = () => {
           setOnlinePendingFriends(tempUsers);
         }
       }
-      if (Array.isArray(user.friendRequests)) {
+      if (user.friendRequests !== null && Array.isArray(user.friendRequests)) {
         if (Array.isArray(online)) {
           let tempUsers = online.filter((userId) =>
             user.friendRequests.includes(userId)
@@ -53,9 +59,17 @@ const SideBar = () => {
           setOnlineFriendRequests(tempUsers);
         }
       }
+      if (user.image !== "") {
+        setPhoto();
+      } else {
+        setPhoto(
+          "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
+        );
+      }
     }, 300);
   }
-  loadData()
+
+  loadData();
   if (user)
     return (
       <div
@@ -72,7 +86,7 @@ const SideBar = () => {
               className='text-decoration-none'
               style={{ color: "inherit" }}>
               <img
-                src='https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png'
+                src={`http://localhost:3007/uploads/images/${user.image}`}
                 alt='default'
                 style={{ width: "150px", height: "auto" }}
               />

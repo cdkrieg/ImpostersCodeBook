@@ -18,6 +18,19 @@ async function updateUser(userId, body) {
       console.log("Error updating user: " + error);
     }
   }
+async function updateImage(userId, formData) {
+  console.log(`${baseUrl}/updateImage/${userId}`)
+    try {
+      let response = await axios.put(`${baseUrl}/updateImage/${userId}`, formData);
+      if (response) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log("Error updating user: " + error);
+    }
+  }
+
+
 
   async function getUser(userId){
     try {
@@ -30,5 +43,5 @@ async function updateUser(userId, body) {
     }
   }
 
-  const AxiosUsers = {updateUser, getUser}
+  const AxiosUsers = {updateUser, getUser, updateImage}
   export default AxiosUsers;

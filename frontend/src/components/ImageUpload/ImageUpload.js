@@ -1,53 +1,38 @@
-import React, { useState, useEffect, useRef,  useContext } from "react";
+import React, { useState,  useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import AxiosUsers from "../../Routes/userRoutes";
 
-const ImageUpload = (props) => {
-  const [previewUrl, setPreviewUrl] = useState();
-  const [isValid, setIsvalid] = useState(false);
-  const filePickerRef = useRef();
-  const {user, file, setFile} = useContext(AuthContext)
+const ImageUpload = () => {
+  const [newImage, setNewImage] = useState({image: ''});
 
-   useEffect(() => {
-    if (!file) {
-      return;
-    }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewUrl(fileReader.result);
-    };
-    console.log(file)
-    fileReader.readAsDataURL(file);
-  }, [file]);
+  const {user} = useContext(AuthContext)
+  const handlePhoto = (event) => {
+    setNewImage({ image: event.target.files[0]})
+  }
+ 
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
-  const pickedHandler = (event) => {
-    let pickedFile;
-    if (event.target.files && event.target.files.length === 1) {
-      pickedFile = event.target.files.file[0];
-      console.log(pickedFile)
-      setFile(pickedFile);
-      setIsvalid(true);
-    } else {
-      setIsvalid(false);
-    }
-  };
+    const formData = new FormData()
+    formData.append('image', newImage.image)
+    updateImage(formData)
+  }
 
-  const pickImagehandler = () => {
-    filePickerRef.current.click();
-  };
+  async function updateImage(formData){
+    let response = await AxiosUsers.updateImage(user._id, formData)
+    if(response)
+    console.log(response)
+  }
 
-  return (
-    <div className='form-control'>
-      <input
-        ref={filePickerRef}
-        style={{ display: "none" }}
-        type='file'
-        accept='.jpg,.jpeg,.png'
-        onChange={pickedHandler}
+   return (
+    <form onSubmit={handleSubmit} encType='multipart/form-data' >
+      <input type='file' accept=".png,.jpg,.jpeg"
+      name="image"
+      onChange={handlePhoto}
       />
-      <div className={`image-upload`}></div>
-      {!isValid && <p>Invalid image selected</p>}
-    </div>
-  );
-};
-
+      <div className="bg"> </div>
+      <input type="submit" />
+    </form>
+   )
+   }
 export default ImageUpload;
