@@ -12,8 +12,17 @@ const Navbar = () => {
   return (
     <div className="navBar">
       <p className="brand">
-        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-          <b>Imposter's CodeBook</b>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "white",
+            textTransform: "uppercase",
+          }}
+        >
+          <b>
+            Imposter's <span style={{ color: "steelblue" }}>CodeBook</span>
+          </b>
         </Link>
       </p>
       <ul>
