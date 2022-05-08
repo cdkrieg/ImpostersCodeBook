@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import AxiosOnlineStatus from "../../Routes/status";
-import AuthContext from "../../context/AuthContext";
 import { CDBSidebar, CDBSidebarHeader, CDBSidebarMenuItem } from "cdbreact";
+import React, { useContext, useEffect, useState } from "react";
+
+import AuthContext from "../../context/AuthContext";
+import AxiosOnlineStatus from "../../Routes/status";
 
 const SideBar = () => {
   const { user } = useContext(AuthContext);
@@ -31,7 +32,6 @@ const SideBar = () => {
       console.log("Error getting list of online users: " + error);
     }
   }
-  
 
   function loadData() {
     setTimeout(() => {
@@ -78,13 +78,16 @@ const SideBar = () => {
           height: "100vh",
           overflow: "scroll initial",
           marginTop: "-32px",
-        }}>
-        <CDBSidebar textColor='#fff' backgroundColor='rgb(51, 59, 65)'>
-          <CDBSidebarHeader prefix={<i className='fa fa-bars fa-large'></i>}>
+          position: "absolute",
+        }}
+      >
+        <CDBSidebar textColor="#fff" backgroundColor="rgb(51, 59, 65)">
+          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <a
-              href='/'
-              className='text-decoration-none'
-              style={{ color: "inherit" }}>
+              href="/"
+              className="text-decoration-none"
+              style={{ color: "inherit" }}
+            >
               <img
                 src={`http://localhost:3007/uploads/images/${user.image}`}
                 alt='default'
@@ -94,19 +97,19 @@ const SideBar = () => {
             </a>
           </CDBSidebarHeader>
 
-          <CDBSidebarMenuItem icon='user'>
+          <CDBSidebarMenuItem icon="user">
             {online && online.length} Users online
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon='user'>
+          <CDBSidebarMenuItem icon="user">
             Friends ({(onlineFriends && onlineFriends.length) || "0"})
           </CDBSidebarMenuItem>
 
-          <CDBSidebarMenuItem icon='user'>
+          <CDBSidebarMenuItem icon="user">
             Pending Friends (
             {(onlinePendingFriends && onlinePendingFriends.length) || "0"})
           </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon='user'>
+          <CDBSidebarMenuItem icon="user">
             Friend Requests (
             {(onlineFriendRequests && onlineFriendRequests.length) || "0"})
           </CDBSidebarMenuItem>

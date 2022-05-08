@@ -11,23 +11,27 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className="navBar">
+      <p className="brand">
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <b>Imposter's CodeBook</b>
+        </Link>
+      </p>
       <ul>
-        <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>Imposter's CodeBook</b>
-          </Link>
+        <li>{user && <button onClick={() => navigate("/")}>Home</button>}</li>
+        <li>
+          {user && (
+            <button onClick={() => navigate("/myPosts")}>My Posts</button>
+          )}
         </li>
         <li>
-          {user && <button onClick={()=>navigate("/")}>Home</button>}
+          {user && (
+            <button onClick={() => navigate("/feedPage")}>Friends Feed</button>
+          )}
         </li>
         <li>
-          {user && <button onClick={()=>navigate("/myPosts")}>My Posts</button>}
-        </li>
-        <li>
-          {user && <button onClick={()=>navigate("/feedPage")}>Friends Feed</button>}
-        </li>
-        <li>
-          {user && <button onClick={()=>navigate("/profile")}>Profile</button>}
+          {user && (
+            <button onClick={() => navigate("/profile")}>Profile</button>
+          )}
         </li>
         <li>
           {user ? (

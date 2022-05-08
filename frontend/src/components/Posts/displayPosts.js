@@ -9,21 +9,18 @@ const DisplayPosts = ({ postList, setHidden, setSinglePost }) => {
   }
 
   return (
-
     <div className="postlist">
       {postList
         .map((post, index) => {
           return (
             <div key={index} className="postbody">
               <button
-                className="postbodies"
-
+                className="my-post-button"
                 onClick={() => {
                   handleClick(post);
                   setSinglePost(post);
                 }}
               >
-
                 {post.name} <br />
                 {post.body}
               </button>

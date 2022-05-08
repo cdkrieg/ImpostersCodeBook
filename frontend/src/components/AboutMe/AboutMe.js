@@ -1,4 +1,5 @@
 import "../../pages/ProfilePage/ProfilePage.css";
+import "../AboutMe/AboutMe.css";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
@@ -35,12 +36,14 @@ const AboutMe = () => {
     <div>
       <div className="aboutme-container">
         <h3>ABOUT ME</h3>
-        <Button type="button" onClick={handleShow}>
-          Edit
-        </Button>
         <br />
         <p>{aboutMe && aboutMe}</p>
         <br />
+        <div className="aboutme-buttons">
+          <Button className="aboutme-button" type="button" onClick={handleShow}>
+            Edit
+          </Button>
+        </div>
       </div>
       <Modal
         show={show}
@@ -56,35 +59,41 @@ const AboutMe = () => {
         <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Group>
             <br />
-            <Form.Control
-              className="textArea"
-              type="textArea"
-              value={aboutMe}
-              onChange={(event) => {
-                setAboutMe(event.target.value);
-              }}
-              onKeyUp={(event) => {
-                if (event.key === "Enter") handleSubmit(event);
-              }}
-            />
-            <br />
-            <Button
-              type="btn"
-              className="button primary"
-              onClick={(event) => {
-                handleSubmit(event);
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              className="close"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+            <div className="form-container">
+              <Form.Control
+                className="textArea"
+                type="textArea"
+                value={aboutMe}
+                onChange={(event) => {
+                  setAboutMe(event.target.value);
+                }}
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") handleSubmit(event);
+                }}
+              />
+              <br />
+              <div className="aboutme-form-buttons">
+                <Button
+                  type="btn"
+                  style={{ margin: "0px 1em 1em 0px" }}
+                  className="button primary"
+                  onClick={(event) => {
+                    handleSubmit(event);
+                  }}
+                >
+                  Submit
+                </Button>
+                <Button
+                  type="button"
+                  style={{ marginBottom: "1em" }}
+                  variant="secondary"
+                  className="close"
+                  onClick={handleClose}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
           </Form.Group>
         </Form>
       </Modal>

@@ -2,9 +2,13 @@
   display: grid;
   margin-top: 2rem;
   margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 10rem;
 }
 
+.profile-name {
+  display: flex;
+  justify-content: center;
+}
 .profile h1,
 h3 {
   text-align: center;
@@ -17,7 +21,6 @@ h3 {
 .profile .body {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  /* border: 10px solid; */
 }
 .row {
   padding-top: 1rem;
@@ -41,22 +44,56 @@ h3 {
 .coding-container {
   border: 1px solid black;
   border-radius: 17px;
-  margin-left: 2em;
 }
 
-.profile-buttons {
+.profile-buttons,
+.projects-button,
+.aboutme-button,
+.aboutme-buttons,
+.coding-button,
+.coding-buttons {
   display: flex;
   justify-content: center;
-  /* border: 1px solid black; */
-}
-
-.profile-button {
   border: none;
   outline: none;
   text-transform: uppercase;
 }
 
+/* .projects-button {
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+}
+.aboutme-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.aboutme-button {
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+} */
+
 .textArea {
   width: 20em;
   height: 5em;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects-form-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.coding-form-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -29,12 +29,14 @@ const ProfilePage = (props) => {
   
   return (
     <div>
-      <h1>Profile for {user.name}</h1>
-      <div className='profile'>
-        <Row className='body'>
+
+      <h1 className="profile-name">Profile for {user.name}</h1>
+      <div className="profile">
+        <Row className="body">
           <Col>
             {!user || !user.image ? <ImageUpload /> : <img src={photo} alt={photAlt} style={{width:"10vw", height:"15vh"}}/>}
           </Col>
+
           <Col>
             <Projects />
             <AboutMe />
@@ -47,7 +49,7 @@ const ProfilePage = (props) => {
         
       </div>
     </div>
-    
+
   );
 };
 

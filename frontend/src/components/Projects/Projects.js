@@ -53,7 +53,11 @@ const Projects = () => {
         </ul>
         <br />
         <div className="profile-buttons">
-          <Button className="profile-button" type="button" onClick={handleShow}>
+          <Button
+            className="projects-button"
+            type="button"
+            onClick={handleShow}
+          >
             Edit
           </Button>
         </div>
@@ -70,35 +74,41 @@ const Projects = () => {
         <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Group>
             <br />
-            <Form.Control
-              className="textArea"
-              type="textArea"
-              value={tempProjects}
-              onChange={(event) => {
-                setTempProjects(event.target.value);
-              }}
-              onKeyUp={(event) => {
-                if (event.key === "Enter") handleSubmit(event);
-              }}
-            />
-            <br />
-            <Button
-              type="btn"
-              className="button primary"
-              onClick={(event) => {
-                handleSubmit(event);
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              className="close"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+            <div className="form-container">
+              <Form.Control
+                className="textArea"
+                type="textArea"
+                value={tempProjects}
+                onChange={(event) => {
+                  setTempProjects(event.target.value);
+                }}
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") handleSubmit(event);
+                }}
+              />
+              <br />
+              <div className="projects-form-buttons">
+                <Button
+                  type="btn"
+                  style={{ margin: "0px 1em 1em 0px" }}
+                  className="button primary"
+                  onClick={(event) => {
+                    handleSubmit(event);
+                  }}
+                >
+                  Submit
+                </Button>
+                <Button
+                  type="button"
+                  style={{ marginBottom: "1em" }}
+                  variant="secondary"
+                  className="close"
+                  onClick={handleClose}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
           </Form.Group>
         </Form>
       </Modal>

@@ -42,9 +42,7 @@ const ListOfCoding = () => {
     <div>
       <div className="coding-container">
         <h3>LIST OF CODING LANGUAGES AND CERTS </h3>
-
         <br />
-
         <ul>
           {codingLanguages &&
             codingLanguages.map((language, index) => {
@@ -52,9 +50,11 @@ const ListOfCoding = () => {
             })}
         </ul>
         <br />
-        <Button type="button" onClick={handleShow}>
-          Edit
-        </Button>
+        <div className="coding-buttons">
+          <Button type="button" onClick={handleShow}>
+            Edit
+          </Button>
+        </div>
       </div>
       <Modal
         show={show}
@@ -68,35 +68,41 @@ const ListOfCoding = () => {
         <Form onSubmit={(event) => handleSubmit(event)}>
           <Form.Group>
             <br />
-            <Form.Control
-              className="textArea"
-              type="textArea"
-              value={tempCodingLanguages}
-              onChange={(event) => {
-                setTempCodingLanguages(event.target.value);
-              }}
-              onKeyUp={(event) => {
-                if (event.key === "Enter") handleSubmit(event);
-              }}
-            />
-            <br />
-            <Button
-              type="btn"
-              className="button primary"
-              onClick={(event) => {
-                handleSubmit(event);
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              className="close"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+            <div className="form-container">
+              <Form.Control
+                className="textArea"
+                type="textArea"
+                value={tempCodingLanguages}
+                onChange={(event) => {
+                  setTempCodingLanguages(event.target.value);
+                }}
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") handleSubmit(event);
+                }}
+              />
+              <br />
+              <div className="coding-form-buttons">
+                <Button
+                  type="btn"
+                  style={{ margin: "0px 1em 1em 0px" }}
+                  className="button primary"
+                  onClick={(event) => {
+                    handleSubmit(event);
+                  }}
+                >
+                  Submit
+                </Button>
+                <Button
+                  type="button"
+                  style={{ marginBottom: "1em" }}
+                  variant="secondary"
+                  className="close"
+                  onClick={handleClose}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
           </Form.Group>
         </Form>
       </Modal>
