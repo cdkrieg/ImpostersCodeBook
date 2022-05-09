@@ -6,10 +6,16 @@ import AxiosPosts from "../../Routes/postRoutes";
 const CustomButton = ({ post }) => {
   const [buttonClass, setButtonClass] = useState("likeButton");
   const [buttonClass2, setButtonClass2] = useState("dislikeButton");
+  const [numOfLikes, setNumOfLikes] = useState(null);
+  const [numOfDislikes, setNumOfDislikes] = useState(null);
   const { user } = useContext(AuthContext);
   const userId = user._id || null;
 
+  
   useEffect(() => {
+   
+    setNumOfLikes(post.likes.length);
+    setNumOfDislikes(post.dislikes.length);
     if (post.dislikes.includes(userId)) {
       setButtonClass("likeButton");
       setButtonClass2("dislikeButtonActive");
@@ -20,9 +26,16 @@ const CustomButton = ({ post }) => {
       setButtonClass("likeButton");
       setButtonClass2("dislikeButton");
     }
+    
   }, []);
+ 
+ 
+ 
 
   function handleClick(event) {
+
+
+   
 
     async function updateTheLikeList(postId, obj) {
       await AxiosPosts.updatePostsLikes(postId, obj);
@@ -40,6 +53,9 @@ const CustomButton = ({ post }) => {
       await AxiosPosts.updatePostsDislikesRemove(postId, obj);
       return obj;
     }
+   
+
+
     let likes="likes";
     let dislikes="dislikes";
     if (event.target.id === "like") {
@@ -47,7 +63,7 @@ const CustomButton = ({ post }) => {
         setButtonClass("likeButtonActive");
         updateTheLikeList(post._id, { likes: userId });
         updateTheDislikeListRemove(post._id,  {dislikes: userId});
-        setButtonClass2("dislikeButton");
+        setButtonClass2("dislikeButton");  
       } else {
         setButtonClass("likeButton");
       }
@@ -67,17 +83,23 @@ const CustomButton = ({ post }) => {
       <button
         className={buttonClass}
         onClick={(event) => {
+          
           handleClick(event);
+      
         }}
       >
+        <div>{numOfLikes}</div>
         <i id="like" className="fa fa-thumbs-up"></i>
       </button>
       <button
         className={buttonClass2}
         onClick={(event) => {
+      
           handleClick(event);
+        
         }}
       >
+        <div>{numOfDislikes}</div>
         <i id="dislike" className="fa fa-thumbs-down"></i>
       </button>
     </div>
