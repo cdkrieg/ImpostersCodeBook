@@ -33,6 +33,7 @@ async function getAPost(postId) {
   }
 }
 
+
 async function updatePosts(obj) {
   try {
     let response = await axios.post("http://localhost:3007/api/posts/", obj);
@@ -133,5 +134,6 @@ const AxiosPosts = {
   updatePostsDislikes,
   updatePostsLikesRemove,
   updatePostsDislikesRemove,
+ 
 };
 export default AxiosPosts;
