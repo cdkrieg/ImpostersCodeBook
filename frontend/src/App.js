@@ -17,6 +17,7 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import FriendsPage from "./pages/FriendsPage/FriendsPage";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
         <Route path="/myPosts" element={<MyPosts />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/feedPage" element={<FeedPage />} />
+        <Route path="/friendsPage" element={<FriendsPage />} />
+
       </Routes>
       <Footer />
     </div>

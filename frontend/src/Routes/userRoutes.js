@@ -30,5 +30,16 @@ async function updateUser(userId, body) {
     }
   }
 
-  const AxiosUsers = {updateUser, getUser}
+  async function getAllUsers(config){
+    try {
+      let response = await axios.get(`${baseUrl}/`,config)
+      if (response) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log("Error getting user: " + error);
+    }
+  }
+
+  const AxiosUsers = {updateUser, getUser, getAllUsers}
   export default AxiosUsers;
